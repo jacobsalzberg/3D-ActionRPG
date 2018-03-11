@@ -275,6 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4550484299924476}
   - component: {fileID: 95682989696449750}
+  - component: {fileID: 195758966487551634}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -1689,3 +1690,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.33466405, y: 0.046286672, z: -0.012958154}
     m_Extent: {x: 0.4047919, y: 0.4168116, z: 0.194383}
   m_DirtyAABB: 0
+--- !u!195 &195758966487551634
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265540752520830}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.5
+  m_Speed: 3
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
