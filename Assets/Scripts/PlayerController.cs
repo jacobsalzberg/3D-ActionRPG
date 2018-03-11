@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour {
 
     private CharacterController characterController;
     private Vector3 currentLookTarget = Vector3.zero;
+    private Animator anim;
 
 	// Use this for initialization
 	void Start ()
     {
         characterController = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -23,7 +25,23 @@ public class PlayerController : MonoBehaviour {
     {
         Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
         characterController.SimpleMove(moveDirection * moveSpeed);
-	}
+
+        //if we are not moving!!
+        if (moveDirection == Vector3.zero)
+        {
+            anim.SetBool("IsWalking", false);
+        } else
+        {
+            anim.SetBool("IsWalking", true);
+        }
+
+        //LMB
+        if (Input.GetMouseButtonDown(0)) 
+            anim.Play("DoubleChop");
+        //RMB
+        if (Input.GetMouseButtonDown(1))
+            anim.Play("SpinAttack");
+    }
 
     //Want to use for physics objects
     //Raycast --> PHYSICS!!!!!!!!!!
