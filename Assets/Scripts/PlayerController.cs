@@ -36,11 +36,18 @@ public class PlayerController : MonoBehaviour {
         }
 
         //LMB
-        if (Input.GetMouseButtonDown(0)) 
-            anim.Play("DoubleChop");
+        if (Input.GetMouseButtonDown(0))
+        {
+            print("enter a1");
+            StartCoroutine(Attack1());
+        }
+
         //RMB
         if (Input.GetMouseButtonDown(1))
+        {
             anim.Play("SpinAttack");
+        }
+
     }
 
     //Want to use for physics objects
@@ -65,5 +72,15 @@ public class PlayerController : MonoBehaviour {
             Quaternion rotation = Quaternion.LookRotation(targetPoisiton - transform.position);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * 10f);
         }
+    }
+
+    IEnumerator Attack1()
+    {
+        //print("ms=0");
+        moveSpeed = 0;
+        anim.Play("DoubleChop");
+        yield return new WaitForSeconds(0.72f);
+        moveSpeed = 6;
+        //print("ms=6");        
     }
 }

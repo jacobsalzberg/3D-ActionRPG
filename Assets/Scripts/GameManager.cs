@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
-    [SerializeField] GameObject player;
+    [SerializeField] private GameObject player;
 
     //alternative: public bool GameOver {get; private set;} 
     private bool gameOver = false;
@@ -16,6 +16,14 @@ public class GameManager : MonoBehaviour {
         get
         {
             return gameOver;
+        }
+    }
+
+    public GameObject Player
+    {
+        get
+        {
+            return player;
         }
     }
 
@@ -43,4 +51,12 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void PlayerHit(int currentHP)
+    {
+        if (currentHP > 0)
+            gameOver = false;
+        else
+            gameOver = true;
+    }
 }

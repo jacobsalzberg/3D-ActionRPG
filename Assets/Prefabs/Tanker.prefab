@@ -474,6 +474,9 @@ GameObject:
   - component: {fileID: 95382531826001798}
   - component: {fileID: 195298386822978676}
   - component: {fileID: 114236712352184500}
+  - component: {fileID: 54658284937258838}
+  - component: {fileID: 136595616070800458}
+  - component: {fileID: 114164692950720326}
   m_Layer: 0
   m_Name: Tanker
   m_TagString: Untagged
@@ -549,6 +552,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4413854096684616}
+  - component: {fileID: 65818907748043918}
   m_Layer: 0
   m_Name: L_hamer
   m_TagString: Untagged
@@ -639,6 +643,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4666157181354640}
+  - component: {fileID: 65297624340265668}
   m_Layer: 0
   m_Name: R_hamer
   m_TagString: Untagged
@@ -1443,6 +1448,45 @@ Transform:
   m_Father: {fileID: 4517150074272118}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &54658284937258838
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641882839633724}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!65 &65297624340265668
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775712453409506}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.5, z: 0.7}
+  m_Center: {x: -0.9, y: 0, z: 0}
+--- !u!65 &65818907748043918
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1679300842732918}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.5, z: 0.7}
+  m_Center: {x: -0.9, y: 0, z: 0}
 --- !u!95 &95382531826001798
 Animator:
   serializedVersion: 3
@@ -1460,6 +1504,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114164692950720326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641882839633724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd37afe98b964641a196c83a07fdbbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 3
+  timeBetweenAttacks: 1
 --- !u!114 &114236712352184500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1472,6 +1529,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!136 &136595616070800458
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1641882839633724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.75
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.91, z: 0}
 --- !u!137 &137025216772007990
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
