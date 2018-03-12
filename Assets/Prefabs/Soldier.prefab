@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 65884276133177872}
   m_Layer: 0
   m_Name: Bip001 R Finger1Nub
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1510,7 +1510,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1265540752520830}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1.8
   m_Drag: Infinity
   m_AngularDrag: Infinity
   m_UseGravity: 1
@@ -1525,7 +1525,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1092923731811346}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3, z: 1}

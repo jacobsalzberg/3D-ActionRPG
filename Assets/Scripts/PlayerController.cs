@@ -23,31 +23,35 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
-        characterController.SimpleMove(moveDirection * moveSpeed);
 
-        //if we are not moving!!
-        if (moveDirection == Vector3.zero)
+        if (!GameManager.instance.GameOver)
         {
-            anim.SetBool("IsWalking", false);
-        } else
-        {
-            anim.SetBool("IsWalking", true);
+            Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            characterController.SimpleMove(moveDirection * moveSpeed);
+
+            //if we are not moving!!
+            if (moveDirection == Vector3.zero)
+            {
+                anim.SetBool("IsWalking", false);
+            }
+            else
+            {
+                anim.SetBool("IsWalking", true);
+            }
+
+            //LMB
+            if (Input.GetMouseButtonDown(0))
+            {
+                //print("enter a1");
+                StartCoroutine(Attack1());
+            }
+
+            //RMB
+            if (Input.GetMouseButtonDown(1))
+            {
+                anim.Play("SpinAttack");
+            }
         }
-
-        //LMB
-        if (Input.GetMouseButtonDown(0))
-        {
-            print("enter a1");
-            StartCoroutine(Attack1());
-        }
-
-        //RMB
-        if (Input.GetMouseButtonDown(1))
-        {
-            anim.Play("SpinAttack");
-        }
-
     }
 
     //Want to use for physics objects
@@ -55,32 +59,35 @@ public class PlayerController : MonoBehaviour {
     private void FixedUpdate()
     {
         //variable for the point where the raycast hits the point
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        Debug.DrawRay(ray.origin, ray.direction*500, Color.blue);
-
-        if(Physics.Raycast(ray, out hit, 500, layerMask, QueryTriggerInteraction.Ignore))
+        if (!GameManager.instance.GameOver)
         {
-            //IF WE ARE NOT ALREADY LOOKING AT OUR MOUSE IS POINTING, MAKE THAT POINT THE LOOK POINT!
-            if (hit.point != currentLookTarget)
-            {
-                currentLookTarget = hit.point;
-            }
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            Vector3 targetPoisiton = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            Quaternion rotation = Quaternion.LookRotation(targetPoisiton - transform.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * 10f);
-        }
+            Debug.DrawRay(ray.origin, ray.direction * 500, Color.blue);
+
+            if (Physics.Raycast(ray, out hit, 500, layerMask, QueryTriggerInteraction.Ignore))
+            {
+                //IF WE ARE NOT ALREADY LOOKING AT OUR MOUSE IS POINTING, MAKE THAT POINT THE LOOK POINT!
+                if (hit.point != currentLookTarget)
+                {
+                    currentLookTarget = hit.point;
+                }
+
+                Vector3 targetPoisiton = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                Quaternion rotation = Quaternion.LookRotation(targetPoisiton - transform.position);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * 10f);
+            }
+        }        
     }
 
     IEnumerator Attack1()
     {
         //print("ms=0");
-        moveSpeed = 0;
+        moveSpeed = 0.0f;
         anim.Play("DoubleChop");
         yield return new WaitForSeconds(0.72f);
-        moveSpeed = 6;
+        moveSpeed = 6.0f;
         //print("ms=6");        
     }
 }

@@ -50,6 +50,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4198784422939410}
+  - component: {fileID: 65037616539981438}
   m_Layer: 0
   m_Name: sword_right_01
   m_TagString: Untagged
@@ -110,6 +111,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4236595377962062}
+  - component: {fileID: 65597658516712144}
   m_Layer: 0
   m_Name: sword_left_01
   m_TagString: Untagged
@@ -1050,6 +1052,8 @@ GameObject:
   - component: {fileID: 95460165285557512}
   - component: {fileID: 143667069468890042}
   - component: {fileID: 114983934695879842}
+  - component: {fileID: 54723331004295790}
+  - component: {fileID: 114282312420016120}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -2169,6 +2173,45 @@ Transform:
   m_Father: {fileID: 4634441462429816}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &54723331004295790
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932412860962028}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
+--- !u!65 &65037616539981438
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1047579295890556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.3, z: 1}
+  m_Center: {x: 0, y: 0, z: 1}
+--- !u!65 &65597658516712144
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1082198990440038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.3, z: 1}
+  m_Center: {x: 0, y: 0, z: 1}
 --- !u!95 &95460165285557512
 Animator:
   serializedVersion: 3
@@ -2186,6 +2229,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114282312420016120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932412860962028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72578a5c976414147a368285504f6700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  timeSinceLastHit: 2
 --- !u!114 &114983934695879842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2197,7 +2253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10c1b534baf39c4690fded532534a76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 5
   layerMask:
     serializedVersion: 2
     m_Bits: 256

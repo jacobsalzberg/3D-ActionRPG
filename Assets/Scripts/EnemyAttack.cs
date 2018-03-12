@@ -47,4 +47,22 @@ public class EnemyAttack : MonoBehaviour {
         yield return null;
         StartCoroutine(Attack());
     }
+
+    public void EnemyBeginAttack ()
+    {
+        foreach (var weapon in weaponColliders)
+        {
+            weapon.enabled = true;
+            print("we");
+        }
+    }
+
+    public void EnemyEndAttack()
+    {
+        foreach (var weapon in weaponColliders)
+        {
+            weapon.enabled = false;
+            print("wd");
+        }
+    }
 }
