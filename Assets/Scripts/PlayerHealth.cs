@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour {
     private Animator anim;
     private int currentHealth;
     private AudioSource audio;
+    private ParticleSystem blood;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class PlayerHealth : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
         currentHealth = startingHealth;
         audio = GetComponent<AudioSource>();
+        blood = GetComponentInChildren<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
@@ -59,6 +61,7 @@ public class PlayerHealth : MonoBehaviour {
             currentHealth -= 10;
             healthSlider.value = currentHealth;
             audio.PlayOneShot(audio.clip);
+            blood.Play();
         }
 
         if (currentHealth <=0)
@@ -73,5 +76,6 @@ public class PlayerHealth : MonoBehaviour {
         anim.SetTrigger("HeroDie");
         characterController.enabled = false;
         audio.PlayOneShot(audio.clip);
+        blood.Play();
     }
 }

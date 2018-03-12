@@ -17,6 +17,7 @@ public class EnemyHealth : MonoBehaviour {
     private Rigidbody rigidBody;
     private CapsuleCollider capsuleCollider;
     private int currentHealth;
+    private ParticleSystem blood;
 
     public bool dissapearEnemy = false;
 
@@ -32,6 +33,7 @@ public class EnemyHealth : MonoBehaviour {
         audio = GetComponent<AudioSource>();
         IsAlive = true;
         currentHealth = startingHealth;
+        blood = GetComponentInChildren<ParticleSystem>();
 	}
         
         
@@ -53,6 +55,7 @@ public class EnemyHealth : MonoBehaviour {
             if (other.tag == "PlayerWeapon")
             {
                 TakeHit();
+                blood.Play();
                 timer = 0f;
             } 
         }
@@ -82,6 +85,7 @@ public class EnemyHealth : MonoBehaviour {
         //play died
         anim.SetTrigger("EnemyDie");
         rigidBody.isKinematic = true;
+
         StartCoroutine(RemoveEnemy());
     }
 
