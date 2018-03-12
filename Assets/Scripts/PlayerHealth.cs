@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 public class PlayerHealth : MonoBehaviour {
 
     [SerializeField] int startingHealth = 100;
     [SerializeField] float timeSinceLastHit = 2f;
+    [SerializeField] Slider healthSlider;
 
     //time between hits
     private float timer = 0f;
@@ -16,9 +19,14 @@ public class PlayerHealth : MonoBehaviour {
     private int currentHealth;
     private AudioSource audio;
 
+    private void Awake()
+    {
+        Assert.IsNotNull(healthSlider);
+    }
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
         anim = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         currentHealth = startingHealth;
@@ -49,6 +57,7 @@ public class PlayerHealth : MonoBehaviour {
             GameManager.instance.PlayerHit(currentHealth);
             anim.Play("Hurt");
             currentHealth -= 10;
+            healthSlider.value = currentHealth;
             audio.PlayOneShot(audio.clip);
         }
 
