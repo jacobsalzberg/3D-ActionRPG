@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     {
         characterController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        swordColliders = GetComponentsInChildren<BoxCollider>();
 	}
 	
 	// Update is called once per frame
@@ -81,6 +82,10 @@ public class PlayerController : MonoBehaviour {
             }
         }        
     }
+
+
+
+    //Eu mudei essa parte, pesado
 
     IEnumerator Attack1()
     {
