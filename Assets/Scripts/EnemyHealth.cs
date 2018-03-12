@@ -71,6 +71,7 @@ public class EnemyHealth : MonoBehaviour {
         {
             IsAlive = false;
             KillEnemy();
+            //print("morri");
         }
     }
 
@@ -78,9 +79,9 @@ public class EnemyHealth : MonoBehaviour {
     {
         capsuleCollider.enabled = false;
         nav.enabled = false;
+        //play died
         anim.SetTrigger("EnemyDie");
         rigidBody.isKinematic = true;
-
         StartCoroutine(RemoveEnemy());
     }
 

@@ -9,6 +9,7 @@ public class EnemyMove : MonoBehaviour {
     [SerializeField] Transform player;
     private NavMeshAgent nav;
     private Animator anim;
+    private EnemyHealth enemyHealth;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class EnemyMove : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
 	}
@@ -24,11 +26,14 @@ public class EnemyMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (!GameManager.instance.GameOver)
+        if (!GameManager.instance.GameOver && enemyHealth.IsAlive)
         {
             nav.SetDestination(player.position);
         }            
-        else
+        else if ((!GameManager.instance.GameOver || GameManager.instance.GameOver) && !enemyHealth.IsAlive)
+        {
+            nav.enabled = false;
+        } else //gameover and enemy is alive
         {
             nav.enabled = false;
             anim.Play("Idle");
