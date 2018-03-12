@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     private CharacterController characterController;
     private Vector3 currentLookTarget = Vector3.zero;
     private Animator anim;
+    private BoxCollider[] swordColliders;
 
 	// Use this for initialization
 	void Start ()
