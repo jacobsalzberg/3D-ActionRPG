@@ -86,7 +86,9 @@ public class EnemyHealth : MonoBehaviour {
 
     IEnumerator RemoveEnemy()
     {
+        //wait for seconds after enemy dies
         yield return new WaitForSeconds(4f);
+        //start to sink the enemy
         dissapearEnemy = true;
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
