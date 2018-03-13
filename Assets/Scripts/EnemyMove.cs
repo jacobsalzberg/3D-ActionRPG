@@ -13,7 +13,7 @@ public class EnemyMove : MonoBehaviour {
 
     private void Awake()
     {
-       // Assert.IsNotNull(player);
+       //Assert.IsNotNull(player);
     }
 
     // Use this for initialization
