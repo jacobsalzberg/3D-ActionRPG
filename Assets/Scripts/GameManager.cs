@@ -1,15 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
     [SerializeField] private GameObject player;
+    [SerializeField] GameObject[] spawnPoints;
+    [SerializeField] GameObject tanker;
+    [SerializeField] GameObject ranger;
+    [SerializeField] GameObject soldier;
+    [SerializeField] Text levelText;
+
 
     //alternative: public bool GameOver {get; private set;} 
     private bool gameOver = false;
+    private int currentLevel;
+    private float generatedSpawnTime = 1;
+    private float currentSpawnTime=0;
+    private GameObject newEnemy;
+
+    private List<EnemyHealth> enemies = new List<EnemyHealth>();
+    private List<EnemyHealth> killedEnemies = new List<EnemyHealth>();
+
+    public void RegisterEnemy(EnemyHealth enemy)
+    {
+        enemies.Add(enemy);
+    }
+
+    public void KilledEnemy(EnemyHealth enemy)
+    {
+        killedEnemies.Add(enemy);
+    }
 
     public bool GameOver
     {
@@ -44,12 +68,13 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        StartCoroutine(Spawn());
+        currentLevel = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        currentSpawnTime += Time.deltaTime;
 	}
 
     public void PlayerHit(int currentHP)
@@ -58,5 +83,42 @@ public class GameManager : MonoBehaviour {
             gameOver = false;
         else
             gameOver = true;
+    }
+
+    IEnumerator Spawn()
+    {
+        //check that spawnt time is greater than the current time
+
+        if (currentSpawnTime > generatedSpawnTime)
+            currentSpawnTime = 0;
+            if (enemies.Count < currentLevel) 
+        {
+            int randomNumber = Random.Range(0, spawnPoints.Length - 1);
+            GameObject spawnLocation = spawnPoints[randomNumber];
+            int randomEnemy = Random.Range(0, 3); //inclusive than EXCLUSIVE
+            if (randomEnemy==0)
+            {
+                newEnemy = Instantiate(soldier) as GameObject;
+            } else if (randomEnemy ==1)
+            {
+                newEnemy = Instantiate(ranger);
+            } else if (randomEnemy ==2) 
+                newEnemy = Instantiate(tanker);
+
+            newEnemy.transform.position = spawnLocation.transform.position;
+        }
+            if (killedEnemies.Count ==currentLevel)
+        {
+            //we want to clear our enemies and our killed enemy arrays (resets the count)
+            enemies.Clear();
+            killedEnemies.Clear();
+
+            yield return new WaitForSeconds(3f);
+            currentLevel++;
+            levelText.text = "Level" + currentLevel;
+        }
+
+        yield return null;
+        StartCoroutine(Spawn());
     }
 }

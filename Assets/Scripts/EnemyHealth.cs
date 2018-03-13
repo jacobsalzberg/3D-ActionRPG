@@ -9,7 +9,7 @@ public class EnemyHealth : MonoBehaviour {
     [SerializeField] private float timeSineceLastHit = 0.5f;
     [SerializeField] private float dissapearSpeed = 2f;
 
-    private AudioSource audio;
+    private new AudioSource audio;
     private float timer = 0f;
     private Animator anim;
     private NavMeshAgent nav;
@@ -26,6 +26,8 @@ public class EnemyHealth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        GameManager.instance.RegisterEnemy(this);
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         nav = GetComponent<NavMeshAgent>();
@@ -80,6 +82,7 @@ public class EnemyHealth : MonoBehaviour {
 
     void KillEnemy ()
     {
+        GameManager.instance.KilledEnemy(this);
         capsuleCollider.enabled = false;
         nav.enabled = false;
         //play died
