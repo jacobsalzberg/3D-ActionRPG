@@ -15,9 +15,6 @@ public class GameManager : MonoBehaviour {
     [SerializeField] Text levelText;
     [SerializeField] GameObject arrow;
 
-    
-
-
     //alternative: public bool GameOver {get; private set;} 
     private bool gameOver = false;
     private int currentLevel;
