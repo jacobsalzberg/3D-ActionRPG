@@ -7,22 +7,23 @@ public class RangerAttack : MonoBehaviour
 
     [SerializeField] private float range = 3f;
     [SerializeField] private float timeBetweenAttacks = 1f;
+    [SerializeField] Transform fireLocation;
 
     private Animator anim;
     private GameObject player;
     private bool playerInRange;
     //boxcollider from the weapon(s), need to account for that
     private EnemyHealth enemyHealth;
+    private GameObject arrow;
 
     // Use this for initialization
     void Start()
     {
-
+        arrow = GameManager.instance.Arrow;
         enemyHealth = GetComponent<EnemyHealth>();
         player = GameManager.instance.Player;
         anim = GetComponent<Animator>();
         StartCoroutine(Attack());
-
     }
 
     // Update is called once per frame
@@ -32,10 +33,13 @@ public class RangerAttack : MonoBehaviour
         {
             playerInRange = true;
             //print("playerinrange");
+            anim.SetBool("PlayerInRange", true);
+            RotateTowards(player.transform);
         }
         else
         {
             playerInRange = false;
+            anim.SetBool("PlayerInRange", false);
         }
     }
 
@@ -52,5 +56,18 @@ public class RangerAttack : MonoBehaviour
         StartCoroutine(Attack());
     }
 
-  
+    private void RotateTowards(Transform player)
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+    }
+
+    public void FireArrow ()
+    {
+        GameObject newArrow = Instantiate(arrow) as GameObject;
+        newArrow.transform.position = fireLocation.position;
+        newArrow.transform.rotation = transform.rotation;
+        newArrow.GetComponent<Rigidbody>().velocity = transform.forward * 25f;
+    }
 }

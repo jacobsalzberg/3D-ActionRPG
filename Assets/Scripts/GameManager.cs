@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] GameObject ranger;
     [SerializeField] GameObject soldier;
     [SerializeField] Text levelText;
+    [SerializeField] GameObject arrow;
+
+    
 
 
     //alternative: public bool GameOver {get; private set;} 
@@ -48,6 +51,14 @@ public class GameManager : MonoBehaviour {
         get
         {
             return player;
+        }
+    }
+
+    public GameObject Arrow
+    {
+        get
+        {
+            return arrow;
         }
     }
 
