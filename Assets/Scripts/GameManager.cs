@@ -17,15 +17,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject healthPowerUp;
     [SerializeField] GameObject speedPowerUp;
-    [SerializeField] int maxPowerUps;
+    [SerializeField] int maxPowerUps=4;
 
     //alternative: public bool GameOver {get; private set;} 
     private bool gameOver = false;
     private int currentLevel;
-    private float generatedSpawnTime = 1f;
-    private float currentSpawnTime=0f;
-    private float powerUpSpawnTime = 5f;
-    private float currentPowerUpSpawnTime = 0f;
+    private float generatedSpawnTime = 1;
+    private float currentSpawnTime=0;
+    private float powerUpSpawnTime = 5;
+    private float currentPowerUpSpawnTime = 0;
     private GameObject newEnemy;
     private int powerups = 0;
     private GameObject newPowerUp;
@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         currentSpawnTime += Time.deltaTime;
         currentPowerUpSpawnTime += Time.deltaTime;
+        //print("powerupspawntime:" + currentSpawnTime);
 	}
 
     public void PlayerHit(int currentHP)
@@ -149,6 +150,7 @@ public class GameManager : MonoBehaviour {
     {
         if (currentPowerUpSpawnTime > powerUpSpawnTime)
         {
+
             currentPowerUpSpawnTime = 0;
 
             if (powerups<maxPowerUps)
@@ -158,9 +160,11 @@ public class GameManager : MonoBehaviour {
                 int randomPowerUp = Random.Range(0, 2); // 0 and 1
                 if (randomPowerUp==0)
                 {
+                    print("instantiate1");
                     newPowerUp = Instantiate(healthPowerUp) as GameObject;
-                 } else if (randomNumber == 1)
+                 } else if (randomPowerUp == 1)
                 {
+                    print("instantiate2");
                     newPowerUp = Instantiate(speedPowerUp) as GameObject;
                 }
 
@@ -168,9 +172,10 @@ public class GameManager : MonoBehaviour {
 
             }
 
-            yield return null;
-            StartCoroutine(PowerUpSpawn());
+            
 
         }
+        yield return null;
+        StartCoroutine(PowerUpSpawn());
     }
 }

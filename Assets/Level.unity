@@ -588,11 +588,23 @@ MonoBehaviour:
   - {fileID: 1675366987}
   - {fileID: 1552216416}
   - {fileID: 252288534}
+  powerUpSpawns:
+  - {fileID: 67351032}
+  - {fileID: 1463892026}
+  - {fileID: 1355776336}
+  - {fileID: 570640484}
+  - {fileID: 1963246248}
+  - {fileID: 1486611033}
   tanker: {fileID: 1641882839633724, guid: 0c1aebd2ac4901f48b407215cae2ccbb, type: 2}
   ranger: {fileID: 1984047861997032, guid: edd3e4dee58540d49a2cca9072242aa2, type: 2}
   soldier: {fileID: 1265540752520830, guid: 46b85cef918f5614cb731a108ee02c30, type: 2}
   levelText: {fileID: 178471804}
   arrow: {fileID: 1617215464680200, guid: b740e20640a03f641a72cfb7bb598668, type: 2}
+  healthPowerUp: {fileID: 1680176085652920, guid: c3ca4dbd7d04fb34c86cdcca482fab37,
+    type: 2}
+  speedPowerUp: {fileID: 1680176085652920, guid: c3ca4dbd7d04fb34c86cdcca482fab37,
+    type: 2}
+  maxPowerUps: 0
 --- !u!4 &637757369
 Transform:
   m_ObjectHideFlags: 0
