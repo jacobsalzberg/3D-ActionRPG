@@ -9,18 +9,25 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private GameObject player;
     [SerializeField] GameObject[] spawnPoints;
+    [SerializeField] GameObject[] powerUpSpawns;
     [SerializeField] GameObject tanker;
     [SerializeField] GameObject ranger;
     [SerializeField] GameObject soldier;
     [SerializeField] Text levelText;
     [SerializeField] GameObject arrow;
+    [SerializeField] GameObject healthPowerUp;
+    [SerializeField] GameObject speedPowerUp;
+    [SerializeField] int maxPowerUps;
 
     //alternative: public bool GameOver {get; private set;} 
     private bool gameOver = false;
     private int currentLevel;
-    private float generatedSpawnTime = 1;
-    private float currentSpawnTime=0;
+    private float generatedSpawnTime = 1f;
+    private float currentSpawnTime=0f;
+    private float powerUpSpawnTime = 5f;
+    private float currentPowerUpSpawnTime = 0f;
     private GameObject newEnemy;
+    private int powerups = 0;
 
     private List<EnemyHealth> enemies = new List<EnemyHealth>();
     private List<EnemyHealth> killedEnemies = new List<EnemyHealth>();
@@ -33,6 +40,11 @@ public class GameManager : MonoBehaviour {
     public void KilledEnemy(EnemyHealth enemy)
     {
         killedEnemies.Add(enemy);
+    }
+
+    public void RegisterPowerUp()
+    {
+        powerups++;
     }
 
     public bool GameOver
@@ -83,6 +95,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         currentSpawnTime += Time.deltaTime;
+        currentPowerUpSpawnTime += Time.deltaTime;
 	}
 
     public void PlayerHit(int currentHP)
