@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Assertions;
 
 public class Menu : MonoBehaviour {
 
@@ -16,6 +18,13 @@ public class Menu : MonoBehaviour {
     private Animator rangerAnim;
 
 
+    private void Awake()
+    {
+        Assert.IsNotNull(hero);
+        Assert.IsNotNull(tanker);
+        Assert.IsNotNull(soldier);
+        Assert.IsNotNull(ranger);
+    }
     // Use this for initialization
     void Start () {
         StartCoroutine(Showcase());
@@ -43,5 +52,14 @@ public class Menu : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(Showcase());
+    }
+
+    public void Battle()
+    {
+        SceneManager.LoadScene("Level");
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
