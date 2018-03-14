@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] GameObject healthPowerUp;
     [SerializeField] GameObject speedPowerUp;
     [SerializeField] int maxPowerUps=4;
+    [SerializeField] Text endGameText;
+    [SerializeField] int finalLevel;
 
     //alternative: public bool GameOver {get; private set;} 
     private bool gameOver = false;
@@ -83,12 +86,15 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+        // not needed (gives problem when swapping from end to lvl)
+        // going to simple menu system to 
+        //DontDestroyOnLoad(gameObject);
     }
 
 
     // Use this for initialization
     void Start () {
+        endGameText.GetComponent<Text>().enabled= (false);
         StartCoroutine(Spawn());
         StartCoroutine(PowerUpSpawn());
         currentLevel = 1;
@@ -106,7 +112,11 @@ public class GameManager : MonoBehaviour {
         if (currentHP > 0)
             gameOver = false;
         else
+        {
             gameOver = true;
+            StartCoroutine(EndGame("Defeat"));
+        }
+            
     }
 
     IEnumerator Spawn()
@@ -116,13 +126,13 @@ public class GameManager : MonoBehaviour {
         if (currentSpawnTime > generatedSpawnTime)
             currentSpawnTime = 0;
             if (enemies.Count < currentLevel) 
-        {
-            int randomNumber = Random.Range(0, spawnPoints.Length - 1);
-            GameObject spawnLocation = spawnPoints[randomNumber];
-            int randomEnemy = Random.Range(0, 3); //inclusive than EXCLUSIVE
-            if (randomEnemy==0)
             {
-                newEnemy = Instantiate(soldier) as GameObject;
+                int randomNumber = Random.Range(0, spawnPoints.Length - 1);
+                GameObject spawnLocation = spawnPoints[randomNumber];
+                int randomEnemy = Random.Range(0, 3); //inclusive than EXCLUSIVE
+                if (randomEnemy==0)
+                {
+                     newEnemy = Instantiate(soldier) as GameObject;
             } else if (randomEnemy ==1)
             {
                 newEnemy = Instantiate(ranger);
@@ -131,7 +141,7 @@ public class GameManager : MonoBehaviour {
 
             newEnemy.transform.position = spawnLocation.transform.position;
         }
-            if (killedEnemies.Count ==currentLevel)
+            if (killedEnemies.Count ==currentLevel && currentLevel != finalLevel)
         {
             //we want to clear our enemies and our killed enemy arrays (resets the count)
             enemies.Clear();
@@ -141,6 +151,11 @@ public class GameManager : MonoBehaviour {
             currentLevel++;
             levelText.text = "Level " + currentLevel;
         }
+        
+            if (killedEnemies.Count == finalLevel)
+            {
+                StartCoroutine(EndGame("Victory!"));
+            }
 
         yield return null;
         StartCoroutine(Spawn());
@@ -178,4 +193,13 @@ public class GameManager : MonoBehaviour {
         yield return null;
         StartCoroutine(PowerUpSpawn());
     }
+
+    IEnumerator EndGame(string outcome)
+    {
+        endGameText.text = outcome;
+        endGameText.GetComponent<Text>().enabled = true;
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("GameMenu");
+    }
+
 }

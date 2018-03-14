@@ -610,6 +610,8 @@ MonoBehaviour:
   speedPowerUp: {fileID: 1603311516418464, guid: 04a0bdea3ec48084f9627ec910d80f85,
     type: 2}
   maxPowerUps: 4
+  endGameText: {fileID: 1827623568}
+  finalLevel: 20
 --- !u!4 &637757369
 Transform:
   m_ObjectHideFlags: 0
