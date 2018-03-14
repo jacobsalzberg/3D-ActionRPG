@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     private float currentPowerUpSpawnTime = 0f;
     private GameObject newEnemy;
     private int powerups = 0;
+    private GameObject newPowerUp;
 
     private List<EnemyHealth> enemies = new List<EnemyHealth>();
     private List<EnemyHealth> killedEnemies = new List<EnemyHealth>();
@@ -89,6 +90,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         StartCoroutine(Spawn());
+        StartCoroutine(PowerUpSpawn());
         currentLevel = 1;
 	}
 	
@@ -141,5 +143,34 @@ public class GameManager : MonoBehaviour {
 
         yield return null;
         StartCoroutine(Spawn());
+    }
+
+    IEnumerator PowerUpSpawn()
+    {
+        if (currentPowerUpSpawnTime > powerUpSpawnTime)
+        {
+            currentPowerUpSpawnTime = 0;
+
+            if (powerups<maxPowerUps)
+            {
+                int randomNumber = Random.Range(0, powerUpSpawns.Length - 1);
+                GameObject spawnLocation = powerUpSpawns[randomNumber];
+                int randomPowerUp = Random.Range(0, 2); // 0 and 1
+                if (randomPowerUp==0)
+                {
+                    newPowerUp = Instantiate(healthPowerUp) as GameObject;
+                 } else if (randomNumber == 1)
+                {
+                    newPowerUp = Instantiate(speedPowerUp) as GameObject;
+                }
+
+                newPowerUp.transform.position = spawnLocation.transform.position;
+
+            }
+
+            yield return null;
+            StartCoroutine(PowerUpSpawn());
+
+        }
     }
 }
