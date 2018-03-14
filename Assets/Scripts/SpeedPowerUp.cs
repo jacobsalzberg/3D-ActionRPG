@@ -25,7 +25,7 @@ public class SpeedPowerUp : MonoBehaviour {
     {
         if (other.gameObject == player)
         {
-            PlayerControllerSpeedPowerUp();
+            playerController.SpeedPowerUp();
             Destroy(gameObject);
         }
     }
