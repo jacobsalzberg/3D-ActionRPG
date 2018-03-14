@@ -417,6 +417,11 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 481336567}
+    - target: {fileID: 82324126822874014, guid: 76fd13653872d2f4e9c24f8f660b9be3,
+        type: 2}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 76fd13653872d2f4e9c24f8f660b9be3, type: 2}
   m_IsPrefabParent: 0
@@ -604,7 +609,7 @@ MonoBehaviour:
     type: 2}
   speedPowerUp: {fileID: 1680176085652920, guid: c3ca4dbd7d04fb34c86cdcca482fab37,
     type: 2}
-  maxPowerUps: 0
+  maxPowerUps: 4
 --- !u!4 &637757369
 Transform:
   m_ObjectHideFlags: 0
