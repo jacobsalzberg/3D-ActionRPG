@@ -13,10 +13,14 @@ public class PlayerController : MonoBehaviour {
     private Vector3 currentLookTarget = Vector3.zero;
     private Animator anim;
     private BoxCollider[] swordColliders;
+    private GameObject fireTrail;
+    private ParticleSystem fireTrailPartciles;
 
 	// Use this for initialization
 	void Start ()
     {
+        fireTrail = GameObject.FindWithTag("Fire") as GameObject;
+        fireTrail.SetActive(false);
         characterController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         swordColliders = GetComponentsInChildren<BoxCollider>();
@@ -111,5 +115,20 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(0.72f);
         moveSpeed = 6.0f;
         //print("ms=6");        
+    }
+
+    public void SpeedPowerUp()
+    {
+        StartCoroutine(FireTrailRoutine());
+    }
+
+    IEnumerator FireTrailRoutine()
+    {
+        fireTrail.SetActive(true);
+        moveSpeed = 10f;
+        yield return new WaitForSeconds(10f);
+
+        moveSpeed = 6f;
+        fireTrail.SetActive(false);
     }
 }
