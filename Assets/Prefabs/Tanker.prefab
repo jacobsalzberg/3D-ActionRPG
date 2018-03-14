@@ -1059,7 +1059,7 @@ Transform:
   m_GameObject: {fileID: 1641882839633724}
   m_LocalRotation: {x: -0, y: 0.99051344, z: -0, w: 0.13741608}
   m_LocalPosition: {x: 20.52, y: 0, z: 0.27}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4480898299009058}
   - {fileID: 4058196464941796}
@@ -1641,7 +1641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb18f1d24554a441992414dde4dea94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &114571920213063154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1653,7 +1652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb06ad885f35ab449fd1c403fada664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 20
+  startingHealth: 120
   timeSineceLastHit: 0.5
   dissapearSpeed: 2
   dissapearEnemy: 0

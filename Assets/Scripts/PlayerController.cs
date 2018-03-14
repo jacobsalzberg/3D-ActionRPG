@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     private BoxCollider[] swordColliders;
     [SerializeField]
     private GameObject fireTrail;
-    private ParticleSystem fireTrailPartciles;
+    private ParticleSystem fireTrailParticles;
 
 	// Use this for initialization
 	void Start ()
@@ -129,8 +129,12 @@ public class PlayerController : MonoBehaviour {
         fireTrail.SetActive(true);
         moveSpeed = 10f;
         yield return new WaitForSeconds(10f);
-
         moveSpeed = 6f;
+        fireTrailParticles = fireTrail.GetComponentInChildren<ParticleSystem>();
+        var em = fireTrailParticles.emission;
+        em.enabled = false;
+        yield return new WaitForSeconds(3f);
+        em.enabled = true;        
         fireTrail.SetActive(false);
     }
 }
